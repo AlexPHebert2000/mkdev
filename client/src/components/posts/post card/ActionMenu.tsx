@@ -9,6 +9,7 @@ import MenuItem from '@mui/material/MenuItem'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import Typography from '@mui/material/Typography';
+import Tooltip from '@mui/material/Tooltip';
 
 export default ({id, refreshParent}: {id: number, refreshParent: Function}) => {
 
@@ -30,13 +31,23 @@ export default ({id, refreshParent}: {id: number, refreshParent: Function}) => {
 
   return (
     <>
-      <IconButton onClick={openMenu}>
-        <MoreVertIcon/>
-      </IconButton>
+      <Tooltip title="More Actions" placement="right" arrow >
+        <IconButton onClick={openMenu}>
+          <MoreVertIcon/>
+        </IconButton>
+      </Tooltip>
       <Menu
       open={open}
       anchorEl={anchorEl}
       onClose={closeMenu}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'left',
+      }}
       >
         <MenuItem sx={{textDecoration: 'none'}} onClick={() => {navigate(`/post/${id}/edit`)}}>
           <EditIcon/>

@@ -19,6 +19,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Grid from '@mui/material/Grid';
 import Badge from '@mui/material/Badge';
+import Tooltip from '@mui/material/Tooltip';
 
 const socket = io('http://localhost:4000');
 
@@ -68,44 +69,51 @@ const Nav = (): ReactElement => {
         }} >
         <Toolbar disableGutters>
           <Grid container spacing={2} sx={{paddingX: 2}}>
-            <Grid item xs={2}>
+          <Grid item lg={1} xs={0}/>
+          <Grid item lg={3} xs={4}>
               <Box sx={{display: 'flex', flexDirection:'row', justifyContent:'start', alignItems:'center', marginX: 2}}>
                 <Button onClick={() => {navigate('/dashboard')}} >
                   <img src="/img/mkdev-logo-square.gif" alt="mkdev logo" style={{height: '60px', width: '60px'}}/>
                 </Button>
               </Box>
             </Grid>
-            <Grid item lg={8} xs={4} />
-            <Grid item lg={2} xs={6}>
+            <Grid item lg={4} xs={2} />
+            <Grid item lg={3} xs={5}>
               <Box sx={{display: 'flex', flexDirection:'row', justifyContent:'end', alignItems:'center', height: '100%'}}>
                 {!!user.id ?
                   (
                     <>
-                      <IconButton onClick={() => {navigate('/create-post')}}>
-                        <AddBoxIcon fontSize="medium" />
-                        <Typography variant='h1' sx={{fontSize: 20}}>Create Post</Typography>
-                      </IconButton>
-                      <IconButton onClick={() => {navigate('/messages')}} sx={{color: 'aliceblue'}}>
-                        <Badge badgeContent={unreadMsgs} invisible={isHidden} color="warning">
-                          <InboxIcon fontSize="medium" />
-                        </Badge>
-                        <Typography variant='h1' sx={{fontSize: 20}}>Inbox</Typography>
-                      </IconButton>
+                      <Tooltip title="Create Post">
+                        <span>
+                        <IconButton onClick={() => {navigate('/create-post')}}>
+                          <AddBoxIcon fontSize="large" />
+                        </IconButton>
+                        </span>
+                      </Tooltip>
+                      <Tooltip title="Messaging">
+                        <span>
+                        <IconButton onClick={() => {navigate('/messages')}} sx={{color: 'aliceblue'}}>
+                          <Badge badgeContent={unreadMsgs} invisible={isHidden} color="warning">
+                            <InboxIcon fontSize="large" />
+                          </Badge>
+                        </IconButton>
+                        </span>
+                      </Tooltip>
                       <Button onClick={handleOpen} sx={{ padding: 0, border: 'none', background: 'none' }}>
                         <Avatar src={user.picture}/>
                       </Button>
                       <Menu open={open} anchorEl={anchorEl} onClose={handleClose} sx={{zIndex: 11}}>
-                        <MenuItem>
-                          <Button onClick={() => { navigate(`/user/${user.id}/profile`)}}>Profile</Button>
+                        <MenuItem onClick={() => { navigate(`/user/${user.id}/profile`)}}>
+                          Profile
                         </MenuItem>
-                        <MenuItem>
-                          <Button onClick={() => { navigate(`/messages`)}}>Messages</Button>
+                        <MenuItem onClick={() => { navigate(`/messages`)}}>
+                          Messages
                         </MenuItem>
-                        <MenuItem>
-                          <Button onClick={() => { navigate(`/create-post`)}}>Create Post</Button>
+                        <MenuItem onClick={() => { navigate(`/create-post`)}}>
+                          Create Post
                         </MenuItem>
-                        <MenuItem>
-                          <Button onClick={() => { navigate(`/logout`)}}>Logout</Button>
+                        <MenuItem onClick={() => { navigate(`/logout`)}}>
+                          Logout
                         </MenuItem>
                         <ThemeToggle />
                       </Menu>
@@ -121,6 +129,7 @@ const Nav = (): ReactElement => {
                 }
               </Box>
             </Grid>
+            <Grid item lg={1} xs={0}/>
           </Grid>
         </Toolbar>
       </AppBar>
