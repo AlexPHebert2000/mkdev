@@ -8,7 +8,6 @@ import io from 'socket.io-client';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -62,7 +61,7 @@ const Nav = (): ReactElement => {
   return (
     <Box sx={{flexGrow: 1}}>
       <AppBar enableColorOnDark sx={{
-          backgroundColor: theme === 'light' ? 'rgba(90, 217, 219, .3)' : 'rgba(51, 34, 77, .6)',
+          backgroundColor: theme === 'light' ? 'rgb(135, 231, 186, .4)' : 'rgb(76, 194, 137,.4)',
           backdropFilter: 'blur(14px) saturate(180%)',
           zIndex: '10',
           height: '70px'
@@ -73,7 +72,7 @@ const Nav = (): ReactElement => {
           <Grid item lg={3} xs={4}>
               <Box sx={{display: 'flex', flexDirection:'row', justifyContent:'start', alignItems:'center', marginX: 2}}>
                 <Button onClick={() => {navigate('/dashboard')}} >
-                  <img src="/img/mkdev-logo-square.gif" alt="mkdev logo" style={{height: '60px', width: '60px'}}/>
+                  <img src="/img/mkdev_1200x600.gif" alt="mkdev logo" style={{height: '60px'}}/>
                 </Button>
               </Box>
             </Grid>
@@ -121,10 +120,10 @@ const Nav = (): ReactElement => {
                   )
                 :
                   (
-                    <>
-                      <Button onClick={() => {navigate('/login')}} size='large'>Login</Button>
+                    <Box sx={{display: 'flex', alignItems: 'center'}}>
+                      <Button onClick={() => {navigate('/login')}} size='large' sx={{color: useTheme().palette.secondary.main}}>Login</Button>
                       <ThemeToggle />
-                    </>
+                    </Box>
                   )
                 }
               </Box>
